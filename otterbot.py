@@ -14,7 +14,7 @@ else:
     img = r.html.find('img', first=True)
     text = img.attrs['data-src']
 
-slack_token = 'slacktoken'
+slack_token = 'slacktoken' # Insert you slack token here
 sc = SlackClient(slack_token)
 
 sc.api_call(
