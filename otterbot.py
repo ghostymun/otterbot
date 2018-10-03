@@ -1,5 +1,6 @@
 from requests_html import HTMLSession
 from slackclient import SlackClient
+import os
 
 session = HTMLSession()
 
@@ -14,7 +15,7 @@ else:
     img = r.html.find('img', first=True)
     text = img.attrs['data-src']
 
-slack_token = 'slacktoken' # Insert you slack token here
+slack_token = os.environ['SLACK_TOKEN']
 sc = SlackClient(slack_token)
 
 sc.api_call(
