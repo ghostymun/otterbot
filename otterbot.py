@@ -6,14 +6,15 @@ session = HTMLSession()
 
 r = session.get('https://dailyotter.org/')
 
-thing = r.html.find('div', first=True)
+img = r.html.find('div', first=True)
+text = 'https://dailyotter.org/'+img.attrs['href']
 
-if "thumbnail" in thing.attrs['class']:
-    text = 'https://dailyotter.org/'+thing.attrs['href']
+# if "thumbnail" in thing.attrs['class']:
+#     text = 'https://dailyotter.org/'+thing.attrs['href']
 
-else:
-    img = r.html.find('img', first=True)
-    text = img.attrs['data-src']
+# else:
+#     img = r.html.find('img', first=True)
+#     text = img.attrs['data-src']
 
 slack_token = os.environ['SLACK_TOKEN']
 sc = SlackClient(slack_token)
