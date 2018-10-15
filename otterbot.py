@@ -32,4 +32,3 @@ resp = sc.api_call(
 
 if resp['ok'] is False:
     raise SlackError(f"chat.postMessage call failed: {resp['error']}")
-
