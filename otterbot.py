@@ -2,6 +2,9 @@ from requests_html import HTMLSession
 from slackclient import SlackClient
 import os
 
+class SlackError(Exception):
+    pass
+
 session = HTMLSession()
 
 r = session.get('https://dailyotter.org/')
@@ -19,10 +22,14 @@ text = 'https://dailyotter.org/'+img.attrs['href']
 slack_token = os.environ['SLACK_TOKEN']
 sc = SlackClient(slack_token)
 
-sc.api_call(
+resp = sc.api_call(
     "chat.postMessage",
     channel="#random",
     text=text,
     username="Daily Otter",
     icon_emoji=":otter-dance:"
     )
+
+if resp['ok'] is False:
+    raise SlackError(f"chat.postMessage call failed: {resp['error']}")
+
