@@ -12,9 +12,15 @@ r = session.get('https://dailyotter.org/')
 post = r.html.find('h2', first=True)
 url = post.absolute_links
 
+import pdb
+pdb.set_trace()
+
 d = session.get(list(url)[0])
-about = r.html.find('iframe, img', first=True)
-print(about)
+d.html.render()
+about = d.html.find('iframe', first=True)
+
+if not about:
+    about = d.html.find('img', first=True)
 
 if about.element.tag == 'img':
     img = d.html.find('img', first=True)
