@@ -12,9 +12,6 @@ r = session.get('https://dailyotter.org/')
 post = r.html.find('h2', first=True)
 url = post.absolute_links
 
-import pdb
-pdb.set_trace()
-
 d = session.get(list(url)[0])
 d.html.render()
 about = d.html.find('iframe', first=True)
